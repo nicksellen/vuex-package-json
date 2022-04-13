@@ -31,3 +31,5 @@ vuex - 4.0.2 -- state management for Vue.js
 ```
 
 So, just needs a release!
+
+The commit that fixes that is this one https://github.com/vuejs/vuex/commit/397e9fba45c8b4ec0c4a33d2578e34829bd348d7
