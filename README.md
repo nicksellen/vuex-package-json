@@ -1,41 +1,33 @@
-# Quasar App (quasar-project)
+# reproduces issue with vuex not exporting package.json
 
-A Quasar Project
+(at least with my version of node, I think it's dependent on that, I have v17.9.0)
 
-## Install the dependencies
-```bash
+```
+# install deps
 yarn
-# or
-npm install
+
+# view quasar info
+npx quasar info
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
+It'll show a bunch of stuff including:
+
+```
+vuex - Not installed
 ```
 
+... even when it is.
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
+Quasar tries to load the package.json for vuex, but encounters this error (not printed out by default, I manually edited the quasar lib that does the loading to print the error)
+
+```
+Package subpath './package.json' is not defined by "exports" in /tmp/foo/quasar-project/node_modules/vuex/package.json
 ```
 
+If I incorporate unreleased changes from #main branch, it works again! `npx quasar info` shows:
 
-### Format the files
-```bash
-yarn format
-# or
-npm run format
+```
+vuex - 4.0.2 -- state management for Vue.js
 ```
 
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
+So, just needs a release!
